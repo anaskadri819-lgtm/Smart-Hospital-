@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hospital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+
+
+    <section id="roleScreen">
+        <div class="hospital-icon">✚</div>
+        <h1>Smart Hospital</h1>
+        <p class="subtitle">Please select your role to continue</p>
+
+        <div class="role-options">
+            <button class="role-card" data-role="patient">
+                <span class="role-icon">👤</span>
+                <span>Patient</span>
+            </button>
+
+            <button class="role-card" data-role="doctor">
+                <span class="role-icon">🩺</span>
+                <span>Doctor</span>
+            </button>
+
+            <button class="role-card" data-role="admin">
+                <span class="role-icon">🛡️</span>
+                <span>Admin</span>
+            </button>
+        </div>
+    </section>
+
+    <section id="loginScreen" hidden>
+        <div class="hospital-icon">✚</div>
+        <h1>Smart Hospital</h1>
+        <p class="subtitle" id="loginTitle">User Login</p>
+
+        <form id="loginForm">
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit" class="login-button">Login</button>
+            <button type="button" id="registerButton" class="back-button">
+    Create Account / Register
+</button>
+            <p id="message" aria-live="polite"></p>
+        </form>
+
+        <button type="button" id="backButton" class="back-button">
+            ← Back to role selection
+        </button>
+    </section>
+    <section id="registerScreen" hidden>
+    <div class="hospital-icon">✚</div>
+
+    <h1>Smart Hospital</h1>
+    <p class="subtitle" id="registerTitle">Create Account</p>
+
+    <form id="registerForm">
+        <label for="registerName">Full Name</label>
+        <input
+            type="text"
+            id="registerName"
+            placeholder="Enter your full name"
+            required
+        >
+
+        <label for="registerEmail">Email Address</label>
+        <input
+            type="email"
+            id="registerEmail"
+            placeholder="Enter your email"
+            required
+        >
+
+        <label for="registerPassword">Password</label>
+        <input
+            type="password"
+            id="registerPassword"
+            placeholder="Create a password (minimum 8 characters)"
+            minlength="8"
+            required
+        >
+
+        <button type="submit" class="login-button">
+            Create Account
+        </button>
+
+        <p id="registerMessage" aria-live="polite"></p>
+    </form>
+
+    <button type="button" id="registerBackButton" class="back-button">
+        ← Back to Login
+    </button>
+</section>
+<!-- Patient Dashboard -->
+<section id="patientDashboard" hidden>
+
+    <div class="hospital-icon">✚</div>
+
+    <h1>Patient Dashboard</h1>
+
+    <p class="subtitle">
+        Welcome, <span id="patientName">Patient</span>!
+    </p>
+
+
+    <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+            <h3>📅 Book Appointment</h3>
+            <p>Book an appointment with a doctor.</p>
+            <button type="button" id="bookAppointmentButton">
+                Book Now
+            </button>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>📋 My Appointments</h3>
+            <p>Check your appointment details and status.</p>
+            <button type="button" id="myAppointmentsButton">
+                View Appointments
+            </button>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>🎫 Queue Token</h3>
+            <p>Check your queue token and waiting status.</p>
+            <button type="button" id="queueTokenButton">
+                View Token
+            </button>
+        </div>
+
+    </div>
+
+    <button type="button" id="logoutButton" class="back-button">
+        Logout
+    </button>
+
+</section>
+<!-- Doctor Dashboard -->
+
+<section id="doctorDashboard" hidden>
+
+
+<div class="hospital-icon">🩺</div>
+
+<h1>Doctor Dashboard</h1>
+
+<p class="subtitle">
+    Welcome, <span id="doctorName">Doctor</span>!
+</p>
+
+<div class="dashboard-cards">
+
+    <div class="dashboard-card">
+        <h3>📅 Today's Appointments</h3>
+        <p>View your scheduled patient appointments.</p>
+        <button type="button" id="doctorAppointmentsButton">
+            View Appointments
+        </button>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>🎫 Patient Queue</h3>
+        <p>View patients waiting for consultation.</p>
+        <button type="button" id="doctorQueueButton">
+            View Patient Queue
+        </button>
+    </div>
+
+</div>
+
+<button type="button" id="doctorLogoutButton" class="back-button">
+    Logout
+</button>
+
+
+</section>
+<!-- Doctor Appointments Screen -->
+
+<section id="doctorAppointmentsScreen" hidden>
+
+<div class="hospital-icon">🩺</div>
+
+<h1>My Patient Appointments</h1>
+<p class="subtitle">Appointments scheduled with you</p>
+
+<div id="doctorAppointmentsList">
+    <p>Your patient appointments will appear here.</p>
+</div>
+
+<button
+    type="button"
+    id="doctorAppointmentsBackButton"
+    class="back-button"
+>
+    ← Back to Dashboard
+</button>
+
+</section>
+<!-- Doctor Queue Screen -->
+
+<section id="doctorQueueScreen" hidden>
+
+<div class="hospital-icon">🎫</div>
+
+<h1>Patient Queue</h1>
+<p class="subtitle">Manage waiting patients</p>
+
+<div id="doctorQueueList">
+    <p>Patient queue will appear here.</p>
+</div>
+
+<button
+    type="button"
+    id="callNextPatientButton"
+    class="login-button"
+>
+    Call Next Patient
+</button>
+
+<p id="queueMessage" aria-live="polite"></p>
+
+<button
+    type="button"
+    id="doctorQueueBackButton"
+    class="back-button"
+>
+    ← Back to Dashboard
+</button>
+</section>
+
+<!-- My Appointments Screen -->
+
+<section id="myAppointmentsScreen" hidden>
+    <div class="hospital-icon">✚</div>
+
+<h1>My Appointments</h1>
+<p class="subtitle">View your booked appointments</p>
+
+<div id="appointmentsList">
+    <p>Your appointments will appear here.</p>
+</div>
+
+<button
+    type="button"
+    id="appointmentsBackButton"
+    class="back-button"
+>
+    ← Back to Dashboard
+</button>
+
+
+</section>
+<!-- Queue Token Screen -->
+
+<section id="queueTokenScreen" hidden>
+
+<div class="hospital-icon">✚</div>
+
+<h1>My Queue Token</h1>
+<p class="subtitle">Your appointment queue details</p>
+
+<div id="queueTokenDetails" class="dashboard-card">
+    <p>Your queue token will appear here.</p>
+</div>
+
+<button
+    type="button"
+    id="queueTokenBackButton"
+    class="back-button"
+>
+    ← Back to Dashboard
+</button>
+
+</section>
+
+<!-- Book Appointment Screen -->
+<section id="appointmentScreen" hidden>
+
+    <div class="hospital-icon">✚</div>
+
+    <h1>Book Appointment</h1>
+    <p class="subtitle">Choose your doctor and appointment time</p>
+
+    <form id="appointmentForm">
+
+        <label for="doctorSelect">Select Doctor</label>
+        <select id="doctorSelect" required>
+            <option value="">Choose a doctor</option>
+        </select>
+
+        <label for="appointmentDate">Appointment Date</label>
+        <input type="date" id="appointmentDate" required>
+
+        <label for="appointmentTime">Appointment Time</label>
+        <input type="time" id="appointmentTime" required>
+
+        <button type="submit" class="login-button">
+            Book Appointment
+        </button>
+
+        <p id="appointmentMessage" aria-live="polite"></p>
+
+    </form>
+
+    <button type="button" id="appointmentBackButton" class="back-button">
+        ← Back to Dashboard
+    </button>
+
+</section>
+<!-- Admin Dashboard -->
+<section id="adminDashboard" hidden>
+
+    <div class="hospital-icon">🛡️</div>
+
+    <h1>Admin Dashboard</h1>
+
+    <p class="subtitle">
+        Welcome, <span id="adminName">Admin</span>!
+    </p>
+    <!-- Admin Dashboard Overview -->
+<div class="dashboard-cards">
+
+    <div class="dashboard-card">
+        <h3>👥 Total Patients</h3>
+        <h2 id="totalPatients">0</h2>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>🩺 Total Doctors</h3>
+        <h2 id="totalDoctors">0</h2>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>📅 Total Appointments</h3>
+        <h2 id="totalAppointments">0</h2>
+    </div>
+
+    <div class="dashboard-card">
+        <h3>🎫 Waiting Patients</h3>
+        <h2 id="waitingPatients">0</h2>
+    </div>
+
+</div>
+
+    <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+            <h3>👥 Manage Patients</h3>
+            <p>View all registered patients.</p>
+            <button type="button" id="managePatientsButton">
+                View Patients
+            </button>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>🩺 Manage Doctors</h3>
+            <p>View all registered doctors.</p>
+            <button type="button" id="manageDoctorsButton">
+                View Doctors
+            </button>
+            <button type="button" id="addDoctorButton">
+    + Add New Doctor
+</button>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>📅 Manage Appointments</h3>
+            <p>View all hospital appointments.</p>
+            <button type="button" id="manageAppointmentsButton">
+                View Appointments
+            </button>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>🎫 Manage Queue</h3>
+            <p>Monitor patient queue status.</p>
+            <button type="button" id="manageQueueButton">
+                View Queue
+            </button>
+        </div>
+
+    </div>
+
+    <button type="button" id="adminLogoutButton" class="back-button">
+        Logout
+    </button>
+
+</section>
+
+<!-- Admin Patients Screen -->
+<section id="adminPatientsScreen" hidden>
+
+    <div class="hospital-icon">👥</div>
+
+    <h1>Manage Patients</h1>
+    <p class="subtitle">All Registered Patients</p>
+
+    <!-- Search Patients -->
+    <div class="search-container">
+        <input
+            type="text"
+            id="patientSearch"
+            placeholder="Search patient by name or email..."
+        >
+    </div>
+
+    <!-- Patients List -->
+    <div id="adminPatientsList">
+        <p>Loading patients...</p>
+    </div>
+
+    <button
+        type="button"
+        id="adminPatientsBackButton"
+        class="back-button"
+    >
+        ← Back to Dashboard
+    </button>
+
+</section>
+<!-- Admin Doctors Screen -->
+<section id="adminDoctorsScreen" hidden>
+
+    <div class="hospital-icon">🩺</div>
+
+    <h1>Manage Doctors</h1>
+    <p class="subtitle">All Registered Doctors</p>
+
+    <!-- Add New Doctor Form -->
+    <div id="addDoctorFormContainer" hidden>
+        <h2>Add New Doctor</h2>
+
+        <form id="addDoctorForm">
+
+            <label for="doctorName">Doctor Name</label>
+            <input
+                type="text"
+                id="doctorName"
+                placeholder="Enter doctor name"
+                required
+            >
+
+            <label for="doctorEmail">Email Address</label>
+            <input
+                type="email"
+                id="doctorEmail"
+                placeholder="Enter doctor email"
+                required
+            >
+
+            <label for="doctorPassword">Password</label>
+            <input
+                type="password"
+                id="doctorPassword"
+                placeholder="Create password (minimum 8 characters)"
+                minlength="8"
+                required
+            >
+
+            <button type="submit">Create Doctor Account</button>
+            <p id="addDoctorMessage"></p>
+
+        </form>
+    </div>
+
+    <!-- Search Doctors -->
+    <div class="search-container">
+        <input
+            type="text"
+            id="doctorSearch"
+            placeholder="Search doctor by name or email..."
+        >
+    </div>
+
+    <!-- Doctors List -->
+    <div id="adminDoctorsList">
+        <p>Loading doctors...</p>
+    </div>
+
+    <button
+        type="button"
+        id="adminDoctorsBackButton"
+        class="back-button"
+    >
+        ← Back to Dashboard
+    </button>
+
+</section>
+<!-- Admin Appointments Screen -->
+<section id="adminAppointmentsScreen" hidden>
+
+    <div class="hospital-icon">📅</div>
+
+    <h1>Manage Appointments</h1>
+    <p class="subtitle">All Hospital Appointments</p>
+
+    <div id="adminAppointmentsList">
+        <p>Loading appointments...</p>
+    </div>
+
+    <button
+        type="button"
+        id="adminAppointmentsBackButton"
+        class="back-button">
+        ← Back to Dashboard
+    </button>
+
+</section>
+<!-- Admin Queue Screen -->
+<section id="adminQueueScreen" hidden>
+
+    <div class="hospital-icon">🎫</div>
+
+    <h1>Manage Queue</h1>
+    <p class="subtitle">All Patient Queue Details</p>
+
+    <div id="adminQueueList">
+        <p>Loading queue...</p>
+    </div>
+
+    <button
+        type="button"
+        id="adminQueueBackButton"
+        class="back-button">
+        ← Back to Dashboard
+    </button>
+
+</section>
+</main>
+
+<script src="app.js"></script>
+
+
+</body>
+</html>
